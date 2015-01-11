@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Leisure Centre App</title>
+<link rel="stylesheet" type="text/css" href="css/index.css"/>
+<script src="js/index.js"></script>
+<script src="js/map.js"></script>
+<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<style></style>
+</head>
+<body>
+<div data-role="page" id="home">
+  <div data-role="header"> <img src="img/logo.png" alt="the Gym Logo" width="150" height="100">
+    <div data-role="navbar">
+      <ul>
+        <li><a href="#home" data-transition="flip" data-direction="reverse" data-icon="home">Home</a></li>
+        <li><a href="#location" data-transition="flip" data-direction="reverse" data-icon="search">Location</a></li>
+        <li><a href="#gymtasks" data-transition="flip" data-direction="reverse" data-icon="check">To-Do List</a></li>
+      </ul>
+    </div>
+  </div>
+  <div data-role="content">
+    <div data-role="fieldcontain" class="ui-hide-label">
+      <h1>Home Page</h1>
+      <p>Welcome to the Sports Leisure Centre App, here you will find small snippets of news on day to day life here at the Gym as well as updates on any upcoming offers we may have to offer throughout the year.</p>
+      <h3>What do we have to offer?</h3>
+      <p>To find our Gym simply click on the location button in the navigation bar or <a href="#location" data-transition="flip">Click Here</a>. This will direct you to a page that will give you the gyms address as well as a map to show you how far you are currently away from the Gym.</p>
+      <img src="img/picture-11.png" alt="" width="100%" height="100%">
+      <p>This App also comes with a great feature that will allow any Gym enthusiast to set themselves tasks to do whilst in the Gym and the ability to check them off as you work through them. Click on the location button in the navigation bar or <a href="#gymtasks" data-transition="flip">Click Here</a> this will direct you to the page.</p>
+      <img src="img/picture-111.png" alt="" width="100%" height="100%">
+      <p>This <a>March</a> we have a great deal coming up for all new members. To find out more about this deal phone <a>012345-678910</a> and speak to one of our staff members.</p>
+    </div>
+  </div>
+</div>
+<div data-role="page" id="location">
+  <div data-role="header"> <img src="img/logo.png" alt="the Gym Logo" width="150" height="100">
+    <div data-role="navbar">
+      <ul>
+        <li><a href="#home" data-transition="flip" data-icon="home">Home</a></li>
+        <li><a href="#location" data-transition="flip" data-direction="reverse" data-icon="search">Location</a></li>
+        <li><a href="#gymtasks" data-transition="flip" data-direction="reverse" data-icon="check">To-Do List</a></li>
+      </ul>
+    </div>
+  </div>
+  <div data-role="content">
+    <div data-role="fieldcontain" class="ui-hide-label">
+      <h1>Location</h1>
+      <img src="img/picture-1111.png" alt="" width="100%" height="100%">
+      <h3>Gym address</h3>
+      <p><a>Street:</a> 46B SideWater Street <br>
+        <a>Town:</a> Strathaven <br>
+        <a>County:</a> South Lanarkshire <br>
+        <a>Post Code:</a> ML106AF <br>
+      </p>
+      <h3>Contact us</h3>
+      <p> <a>Telephone:</a> 01357654321 <br>
+        <a>Email:</a> TheGym@email.com <br>
+      </p>
+      <h3>How far are you away from the gym?</h3>
+      <div id="map" width="100%" height="600"> </div>
+    </div>
+  </div>
+</div>
+<div data-role="page" id="gymtasks">
+<div data-role="header"> <img src="img/logo.png" alt="the Gym Logo" width="150" height="100">
+  <div data-role="navbar">
+    <ul>
+      <li><a href="#home" data-transition="flip" data-icon="home">Home</a></li>
+      <li><a href="#location" data-transition="flip" data-icon="search">Location</a></li>
+      <li><a href="#gymtasks" data-transition="flip" data-direction="reverse" data-icon="check">To-Do List</a></li>
+    </ul>
+  </div>
+</div>
+<div data-role="content">
+<div data-role="fieldcontain" class="ui-hide-label">
+<body>
+<div data-role="controlgroup">
+  <p>A personal trainer will always advise you to keep a track of what you are doing in the Gym. This gives you a guide of progress over time of how you are achieving. With this part of the app you can easily keep a "to-do list" for when you are in the Gym. To read the Instructions available for this feature <a href="#instructions" data-transition="flip">Click Here</a></p>
+  <input type="button" value="Show Current Tasks" onclick="loadGymTaskList()" data-icon="grid" data-iconpos="right"/>
+  <input type="button" value="Add a New Gym-Task" onclick="createNewGymTask()"data-icon="plus" data-iconpos="right"/>
+  <input type="button" value="Remove Completed Tasks" onclick="removeCompletedTasks()" data-icon="delete" data-iconpos="right"/>
+</div>
+<br/>
+<br/>
+<table id="dataTable" width="100%" border="0">
+</table>
+</body>
+</div>
+</div>
+</div>
+<div data-role="page" id="instructions">
+  <div data-role="header"><img src="img/logo.png" alt="the Gym Logo" width="150" height="100">
+    <div data-role="navbar">
+      <ul>
+        <li><a href="#home" data-transition="flip" data-direction="reverse" data-icon="home">Home</a></li>
+        <li><a href="#location" data-transition="flip" data-direction="reverse" data-icon="search">Location</a></li>
+        <li><a href="#gymtasks" data-transition="flip" data-direction="reverse" data-icon="check">To-Do List</a></li>
+      </ul>
+    </div>
+  </div>
+  <div data-role="content">
+    <div data-role="fieldcontain" class="ui-hide-label">
+      <h3>Instructions</h3>
+      <p><a>(1)</a>When using this part of the app always make sure you hit the show current tasks button. This will load any tasks from previous sessions. If you do not press this button before adding a new task you run the risk of losing old tasks.</p>
+      <p><a>(2)</a>To Add a new Gym-Task all you have to do is press the add a new Gym-Task button and follow the promted screen pop ups it is as simple as that.</p>
+      <p><a>(3)</a>When you have completed a task hit the checkbox beside it and the task will be scored out. The task may be completed but will remain in your list until completed tasks have been cleared or the individual task is cleared using its own delete button.</p>
+      <p><a>(4)</a>To update a task simply click on the text box containing its description and you will be able to alter the text.</p>
+    </div>
+  </div>
+</div>
+</div>
+</body>
+</html>

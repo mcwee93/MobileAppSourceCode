@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />    
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>    
+
+    <script type="text/javascript">
+      function getLocation(){
+        navigator.geolocation.getCurrentPosition(handleSuccess,handleError);
+      }
+
+      function initiate_watchlocation() {  
+        if(watchProcess == null){
+          watchProcess = navigator.geolocation.watchPosition(handleSuccess,handleError);
+        }
+      } 
+
+      function stop_watchlocation() {  
+        if(watchProcess != null){
+          navigator.geolocation.clearWatch(watchProcess);
+        }
+      } 
+
+      function handleSuccess(position){
+        drawMap(position);
+      }
+
+      function handleError(error){
+        switch(error.code)
+        {
+          case error.PERMISSION_DENIED: alert("User did not share geolocation data");break;  
+          case error.POSITION_UNAVAILABLE: alert("Could not detect current position");break;  
+          case error.TIMEOUT: alert("Retrieving position timed out");break;  
+          default: alert("Unknown Error");break;  
+        }
+      }
+
+
+      function drawMap(position) {
+        var container = $('#map_canvas');
+        var myLatLong = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+        var mapOptions = {
+          center: myLatLong,
+          zoom: 12,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(container[0],mapOptions);
+        container.css('display','block');
+        var marker = new google.maps.Marker({ 
+          position: myLatLong,
+          map:map,
+          title:"My Position (Accuracy of Position: " + position.coords.accuracy + " Meters), Altitude: " 
+            + position.coords.altitude + ' Altitude Accuracy: ' + position.coords.altitudeAccuracy
+        });
+      }
+
+      function drawStaticMap(position){
+        var container = $('#map_canvas');
+        var imageUrl = "http://maps.google.com/maps/api/staticmap?sensor=false&center=" + position.coords.latitude + "," +  
+                    position.coords.longitude + "&zoom=18&size=640x500&markers=color:blue|label:S|" +  
+                    position.coords.latitude + ',' + position.coords.longitude;  
+
+        container.css({
+          'display':'block',
+          'width' : 640
+        });
+        $('<img/>',{
+          src : imageUrl
+        }).appendTo(container);
+      } 
+    </script>
+  </head>
+  <body >
+    <button id="getLocation">Find My Location</button>
+    <div style="text-align:center">
+      <button id="initWatch">Put Watch on Your Position</button>
+      <button id="stopWatch">Stop Position Watching</button>
+    </div>
+    <div id="map_canvas" ></div>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+    
+
+  </body>
+</html>
